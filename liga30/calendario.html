@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario | Liga S30</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #1abc9c;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+
+        /* ESTILOS GENERALES CON FONDO */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+        }
+
+        /* HEADER TRANSPARENTE */
+        header {
+            background: rgba(44, 62, 80, 0.9);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Estilos para el logo */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+  }
+  
+  #main-logo {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 3px solid #1abc9c;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  #main-logo:hover {
+    transform: rotate(15deg);
+    box-shadow: 0 6px 12px rgba(26, 188, 156, 0.4);
+  }
+  
+  .logo-container h1 {
+    margin: 0;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.5rem;
+    background: linear-gradient(to right, #1abc9c, #3498db);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+  }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        .login-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .login-btn:hover {
+            background: #16a085;
+            transform: translateY(-2px);
+        }
+
+        /* CONTENEDOR PRINCIPAL */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* TÍTULOS CON EFECTO NEÓN */
+        h1 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 3rem;
+            color: white;
+            text-shadow: 0 0 10px rgba(26, 188, 156, 0.7);
+            margin: 40px 0 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--secondary);
+            box-shadow: 0 0 10px var(--secondary);
+        }
+
+        h2 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2rem;
+            color: white;
+            border-left: 4px solid var(--secondary);
+            padding-left: 15px;
+            margin: 30px 0 20px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        /* CALENDARIO (ESTILO MODERNO) */
+        .calendario-mes {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .semana {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .dia-header {
+            text-align: center;
+            font-weight: bold;
+            padding: 10px;
+            background: rgba(44, 62, 80, 0.8);
+            color: white;
+            border-radius: 8px;
+        }
+
+        .dia {
+            min-height: 140px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            position: relative;
+            transition: all 0.3s;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .dia:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        .dia-vacio {
+            background: transparent;
+            border: none;
+        }
+
+        .dia-numero {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            text-align: center;
+            background: rgba(236, 240, 241, 0.7);
+            padding: 5px;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .partido {
+            background: rgba(26, 188, 156, 0.15);
+            border-left: 3px solid var(--secondary);
+            padding: 10px;
+            margin-top: 8px;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .partido:hover {
+            background: rgba(26, 188, 156, 0.3);
+            transform: translateX(5px);
+        }
+
+        /* FIXTURE MEJORADO */
+        .fixture-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+            backdrop-filter: blur(5px);
+        }
+
+        .jornada {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .jornada:last-child {
+            border-bottom: none;
+        }
+
+        .jornada-titulo {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--secondary);
+            display: flex;
+            align-items: center;
+        }
+
+        .jornada-titulo i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .partido-fixture {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 20px;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partido-fixture::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--secondary);
+        }
+
+        .partido-fixture:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .equipo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .equipo-local {
+            justify-content: flex-end;
+            text-align: right;
+        }
+
+        .equipo-visitante {
+            justify-content: flex-start;
+        }
+
+        .equipo-logo {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .equipo-nombre {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .partido-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .partido-estado {
+            background: var(--accent);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .partido-marcador {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .partido-fecha {
+            color: #666;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .partido-fecha i {
+            color: var(--secondary);
+        }
+
+        .partido-detalles {
+            grid-column: span 3;
+            padding-top: 10px;
+            font-size: 0.85rem;
+            color: #666;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .partido-detalles span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* FOOTER TRANSLÚCIDO */
+        footer {
+            background: rgba(44, 62, 80, 0.9);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            margin-top: 50px;
+            backdrop-filter: blur(5px);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: var(--light);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .social-media {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .social-icon i {
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .partido-fixture {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .equipo-local, .equipo-visitante {
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .partido-detalles {
+                grid-column: span 1;
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .semana {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .semana {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .calendario-mes, .fixture-section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-container" onclick="window.location.href='index.html'">
+            <img src="logo.jpg" alt="Liga Super 30" id="main-logo">
+            <h1>LIGA S30</h1>
+          </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="resultados.html">Resultados</a></li>
+                <li><a href="equipos.html">Equipos</a></li>
+                <li><a href="tabla.html">Posiciones</a></li>
+                <li><a href="calendario.html">Calendario</a></li>
+                <li><a href="imagenes.html">Imágenes</a></li>
+                <li><a href="noticias.html">Noticias</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+        <button class="login-btn">Iniciar sesión</button>
+    </header>
+
+    <div class="container">
+        <!-- Título principal -->
+        <h1>CALENDARIO LIGA S30</h1>
+        
+        <!-- Calendario Mensual Mejorado -->
+        <div class="calendario-mes">
+            <h2><i class="far fa-calendar-alt"></i> Marzo 2025</h2>
+            <div class="semana">
+                <!-- Encabezados días -->
+                <div class="dia-header">Lun</div>
+                <div class="dia-header">Mar</div>
+                <div class="dia-header">Mié</div>
+                <div class="dia-header">Jue</div>
+                <div class="dia-header">Vie</div>
+                <div class="dia-header">Sáb</div>
+                <div class="dia-header">Dom</div>
+                
+                <!-- Días vacíos para alinear inicio -->
+                <div class="dia-vacio"></div>
+                <div class="dia-vacio"></div>
+                <div class="dia-vacio"></div>
+                <div class="dia-vacio"></div>
+                
+                <!-- Domingo 30 -->
+                <div class="dia">
+                    <div class="dia-numero">30</div>
+                    <div class="partido" onclick="window.location.href='#Domingo30'">
+                        <strong>M. Pollo</strong> vs <strong>El Rejunte</strong><br>
+                    </div>
+                </div>
+                
+                <!-- Sábado 29 -->
+                <div class="dia">
+                    <div class="dia-numero">29</div>
+                    <div class="partido" onclick="window.location.href='#sabado29'">
+                        <strong>Rejunte</strong> vs <strong>Oriente</strong><br>
+                        <small><i class="far fa-clock"></i> 18:30 - Cancha 2</small>
+                    </div>
+                </div>
+                
+                <!-- Domingo 30 -->
+                <div class="dia">
+                    <div class="dia-numero">30</div>
+                    <div class="partido" onclick="window.location.href='#domingo30'">
+                        <strong>Ferro</strong> vs <strong>Arenales</strong><br>
+                        <small><i class="far fa-clock"></i> 19:00 - Cancha 3</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Fixture Mejorado -->
+        <div class="fixture-section">
+            <h2><i class="fas fa-list-ol"></i> FIXTURE COMPLETO</h2>
+            
+            <!-- Jornada 1 -->
+            <div class="jornada">
+                <div class="jornada-titulo">
+                    <i class="fas fa-futbol"></i> JORNADA 1 - 28 al 30 de Junio
+                </div>
+                
+                <!-- Partido 1 -->
+                <div class="partido-fixture" id="viernes28">
+                    <div class="equipo equipo-local">
+                        <span class="equipo-nombre">Mister Pollo</span>
+                        <img src="https://via.placeholder.com/30" alt="Mister Pollo" class="equipo-logo">
+                    </div>
+                    
+                    <div class="partido-info">
+                        <span class="partido-estado">POR JUGAR</span>
+                        <span class="partido-marcador">- : -</span>
+                        <span class="partido-fecha">
+                            <i class="far fa-calendar"></i> Vie 28 Jun
+                        </span>
+                    </div>
+                    
+                    <div class="equipo equipo-visitante">
+                        <img src="https://via.placeholder.com/30" alt="Aston Birra" class="equipo-logo">
+                        <span class="equipo-nombre">Aston Birra</span>
+                    </div>
+                    
+                    <div class="partido-detalles">
+                        <span><i class="far fa-clock"></i> 20:00 hs</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Cancha 1</span>
+                        <span><i class="fas fa-whistle"></i> Árbitro: J. Pérez</span>
+                    </div>
+                </div>
+                
+                <!-- Partido 2 -->
+                <div class="partido-fixture" id="sabado29">
+                    <div class="equipo equipo-local">
+                        <span class="equipo-nombre">El Rejunte</span>
+                        <img src="https://via.placeholder.com/30" alt="El Rejunte" class="equipo-logo">
+                    </div>
+                    
+                    <div class="partido-info">
+                        <span class="partido-estado">POR JUGAR</span>
+                        <span class="partido-marcador">- : -</span>
+                        <span class="partido-fecha">
+                            <i class="far fa-calendar"></i> Sáb 29 Jun
+                        </span>
+                    </div>
+                    
+                    <div class="equipo equipo-visitante">
+                        <img src="https://via.placeholder.com/30" alt="Oriente" class="equipo-logo">
+                        <span class="equipo-nombre">Oriente</span>
+                    </div>
+                    
+                    <div class="partido-detalles">
+                        <span><i class="far fa-clock"></i> 18:30 hs</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Cancha 2</span>
+                        <span><i class="fas fa-whistle"></i> Árbitro: L. González</span>
+                    </div>
+                </div>
+                
+                <!-- Partido 3 -->
+                <div class="partido-fixture" id="domingo30">
+                    <div class="equipo equipo-local">
+                        <span class="equipo-nombre">Ferro</span>
+                        <img src="https://via.placeholder.com/30" alt="Ferro" class="equipo-logo">
+                    </div>
+                    
+                    <div class="partido-info">
+                        <span class="partido-estado">POR JUGAR</span>
+                        <span class="partido-marcador">- : -</span>
+                        <span class="partido-fecha">
+                            <i class="far fa-calendar"></i> Dom 30 Jun
+                        </span>
+                    </div>
+                    
+                    <div class="equipo equipo-visitante">
+                        <img src="https://via.placeholder.com/30" alt="Arenales" class="equipo-logo">
+                        <span class="equipo-nombre">Arenales</span>
+                    </div>
+                    
+                    <div class="partido-detalles">
+                        <span><i class="far fa-clock"></i> 19:00 hs</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Cancha 3</span>
+                        <span><i class="fas fa-whistle"></i> Árbitro: M. Rodríguez</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Jornada 2 (ejemplo) -->
+            <div class="jornada">
+                <div class="jornada-titulo">
+                    <i class="fas fa-futbol"></i> JORNADA 2 - 5 al 7 de Julio
+                </div>
+                
+                <!-- Partido ejemplo terminado -->
+                <div class="partido-fixture">
+                    <div class="equipo equipo-local">
+                        <span class="equipo-nombre">Aston Birra</span>
+                        <img src="https://via.placeholder.com/30" alt="Aston Birra" class="equipo-logo">
+                    </div>
+                    
+                    <div class="partido-info">
+                        <span class="partido-estado" style="background: #27ae60;">FINALIZADO</span>
+                        <span class="partido-marcador">2 : 1</span>
+                        <span class="partido-fecha">
+                            <i class="far fa-calendar"></i> Vie 5 Jul
+                        </span>
+                    </div>
+                    
+                    <div class="equipo equipo-visitante">
+                        <img src="https://via.placeholder.com/30" alt="El Rejunte" class="equipo-logo">
+                        <span class="equipo-nombre">El Rejunte</span>
+                    </div>
+                    
+                    <div class="partido-detalles">
+                        <span><i class="far fa-clock"></i> 20:30 hs</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Cancha 1</span>
+                        <span><i class="fas fa-user"></i> 120 espectadores</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ <!-- Footer Premium -->
+ <footer>
+    <p>&copy; 2024 Liga Super 30. Todos los derechos reservados.</p>
+</footer>
+
+    <script>
+        // Ejemplo de funcionalidad para marcar partidos en vivo
+        const partidos = document.querySelectorAll('.partido-fixture');
+        
+        partidos.forEach(partido => {
+            partido.addEventListener('click', () => {
+                // Simular marcador en vivo (solo demostración)
+                if(partido.querySelector('.partido-estado').textContent === 'POR JUGAR') {
+                    partido.querySelector('.partido-estado').textContent = 'EN VIVO';
+                    partido.querySelector('.partido-estado').style.background = '#e74c3c';
+                    partido.querySelector('.partido-marcador').textContent = '0 : 0';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

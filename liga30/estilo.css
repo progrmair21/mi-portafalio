@@ -1,0 +1,292 @@
+:root {
+    --primary: #2c3e50;
+    --secondary: #1abc9c;
+    --accent: #e74c3c;
+    --light: #ecf0f1;
+    --dark: #2c3e50;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: 
+      linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url('https://images.unsplash.com/photo-1579952363873-27f3bade9f55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+    min-height: 100vh;
+  }
+  
+  header {
+    background-color: rgba(44, 62, 80, 0.9);
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(5px);
+  }
+  
+  /* Estilos para el logo */
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+  }
+
+  #main-logo {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 3px solid var(--secondary);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  #main-logo:hover {
+    transform: rotate(15deg);
+    box-shadow: 0 6px 12px rgba(26, 188, 156, 0.4);
+  }
+
+  .logo-container h1 {
+    margin: 0;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.5rem;
+    background: linear-gradient(to right, var(--secondary), #3498db);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+  }
+  
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  nav ul li {
+    margin: 0 10px;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .login-btn {
+    background-color: var(--secondary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+  
+  .login-btn:hover {
+    background-color: #16a085;
+    transform: translateY(-2px);
+  }
+  
+  .container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .page-title {
+    grid-column: span 2;
+    color: white;
+    text-align: center;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.5rem;
+    margin: 10px 0 20px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  }
+  
+  /* Estilos para el formulario */
+  #ingresar-resultados {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    margin-bottom: 12px;
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .form-row .form-group {
+    flex: 1;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 0.9em;
+  }
+  
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+  }
+  
+  /* Estilos para la tabla de resultados */
+  .results-container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 15px;
+    height: fit-content;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 0.9em;
+  }
+  
+  th {
+    background-color: #4CAF50;
+    color: white;
+    position: sticky;
+    top: 0;
+  }
+  
+  tr:nth-child(even) {
+    background-color: rgba(0,0,0,0.05);
+  }
+  
+  tr:hover {
+    background-color: rgba(0,0,0,0.1);
+  }
+  
+  .fecha {
+    background-color: #f5a249;
+    color: rgb(21, 20, 20);
+    font-weight: bold;
+  }
+  
+  .partido-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .equipos {
+    font-weight: bold;
+  }
+  
+  .resultado {
+    font-weight: bold;
+    color: var(--primary);
+  }
+  
+  
+  /* Resultados recientes */
+  #resultados-recientes {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    grid-column: span 2;
+  }
+  
+  #resultados-recientes h3 {
+    margin-top: 0;
+    border-bottom: 2px solid var(--secondary);
+    padding-bottom: 8px;
+    color: var(--primary);
+  }
+  
+  .resultado-reciente {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .resultado-reciente:last-child {
+    border-bottom: none;
+  }
+  
+  /* Footer */
+  footer {
+    background-color: rgba(51, 51, 51, 0.9);
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 30px;
+    backdrop-filter: blur(5px);
+  }
+  
+  footer p {
+    margin: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .container {
+      grid-template-columns: 1fr;
+    }
+    
+    .page-title, #resultados-recientes {
+      grid-column: span 1;
+    }
+  }

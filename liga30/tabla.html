@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de Posiciones - Liga Super 30</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link  rel="stylesheet" href="tabla.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container" onclick="window.location.href='index.html'">
+            <img src="logo.jpg" alt="Liga Super 30" id="main-logo">
+            <h1>LIGA S30</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="resultados.html">Resultados</a></li>
+                <li><a href="equipos.html">Equipos</a></li>
+                <li><a href="tabla.html">Posiciones</a></li>
+                <li><a href="calendario.html">Calendario</a></li>
+                <li><a href="imagenes.html">Imágenes</a></li>
+                <li><a href="noticias.html">Noticias</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="login.html" class="login-btn">Iniciar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>Tabla de Posiciones</h1>
+        
+        <!-- Tabla Zona A -->
+        <section class="zona-section" id="zona-a">
+            <h2 class="zona-title">ZONA A</h2>
+            <table id="tabla-zona-a">
+                <thead>
+                    <tr>
+                        <th>Pos</th>
+                        <th>Equipo</th>
+                        <th>PJ</th>
+                        <th>PG</th>
+                        <th>PE</th>
+                        <th>PP</th>
+                        <th>GF</th>
+                        <th>GC</th>
+                        <th>DG</th>
+                        <th>Pts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los datos se cargarán automáticamente -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Tabla Zona B -->
+        <section class="zona-section" id="zona-b">
+            <h2 class="zona-title">ZONA B</h2>
+            <table id="tabla-zona-b">
+                <thead>
+                    <tr>
+                        <th>Pos</th>
+                        <th>Equipo</th>
+                        <th>PJ</th>
+                        <th>PG</th>
+                        <th>PE</th>
+                        <th>PP</th>
+                        <th>GF</th>
+                        <th>GC</th>
+                        <th>DG</th>
+                        <th>Pts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los datos se cargarán automáticamente -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Liga Super 30. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Datos de ejemplo (reemplazar con tus datos reales)
+        const equiposZonaA = [
+            { nombre: "VICTORIANO", escudo: "victorianos.jpg", pj: 6, pg: 5, pe: 1, pp: 0, gf: 18, gc: 6, pts: 16 },
+            { nombre: "HURACAN", escudo: "huracan.jpg", pj: 5, pg: 3, pe: 2, pp: 0, gf: 12, gc: 3, pts: 11 },
+            { nombre: "EL SANTO", escudo: "san.jpg", pj: 5, pg: 2, pe: 3, pp: 0, gf: 8, gc: 6, pts: 9 },
+            { nombre: "ASTON BIRRA", escudo: "aston birra.jpg", pj: 5, pg: 4, pe: 0, pp: 1, gf: 12, gc: 4, pts: 12 },
+            { nombre: "FERNY", escudo: "ferny.jpg", pj: 6, pg: 1, pe: 1, pp: 4, gf: 6, gc: 10, pts: 4 },
+            { nombre: "ARENALES", escudo: "arenales.jpg", pj: 6, pg: 0, pe: 2, pp: 4, gf: 4, gc: 12, pts: 2 },
+            { nombre: "R.SAN MARTIN", escudo: "sanma.jpg", pj: 6, pg: 1, pe: 2, pp: 3, gf: 7, gc: 11, pts: 5 },
+            { nombre: "ORIENTE POCITEÑO", escudo: "oriente.jpg", pj: 5, pg: 0, pe: 1, pp: 4, gf: 3, gc: 12, pts: 1 }
+        ];
+
+        const equiposZonaB = [
+            { nombre: "MISTER POLLO", escudo: "mister.jpg", pj: 4, pg: 4, pe: 0, pp: 0, gf: 34, gc: 0, pts: 12 },
+            { nombre: "LA VILLA REAL", escudo: "villa.jpg", pj: 6, pg: 2, pe: 3, pp: 1, gf: 10, gc: 9, pts: 9 },
+            { nombre: "ESTIBADORES", escudo: "estibadores.jpg", pj: 6, pg: 3, pe: 1, pp: 2, gf: 8, gc: 13, pts: 10 },
+            { nombre: "LOS PUMAS", escudo: "puma.jpg", pj: 6, pg: 2, pe: 2, pp: 2, gf: 9, gc: 13, pts: 8 },
+            { nombre: "EL REJUNTE", escudo: "rjte.jpg", pj: 6, pg: 3, pe: 1, pp: 2, gf: 12, gc: 7, pts: 10 },
+            { nombre: "UNION", escudo: "union.jpg", pj: 5, pg: 2, pe: 0, pp: 3, gf: 6, gc: 14, pts: 6 },
+            { nombre: "ALMAGRO", escudo: "almagro.jpg", pj: 5, pg: 2, pe: 1, pp: 2, gf: 7, gc: 8, pts: 7 },
+            { nombre: "MATADERO", escudo: "matadero.jpg", pj: 5, pg: 1, pe: 0, pp: 4, gf: 4, gc: 13, pts: 3 },
+            { nombre: "FERROVIARIO", escudo: "ferro.jpg", pj: 5, pg: 1, pe: 0, pp: 4, gf: 3, gc: 22, pts: 3 }
+        ];
+
+        // Función para ordenar equipos según reglas de fútbol
+        function ordenarEquipos(equipos) {
+            return equipos.sort((a, b) => {
+                // 1. Mayor cantidad de puntos
+                if (b.pts !== a.pts) return b.pts - a.pts;
+                
+                // 2. Mejor diferencia de goles (GF - GC)
+                const difA = a.gf - a.gc;
+                const difB = b.gf - b.gc;
+                if (difB !== difA) return difB - difA;
+                
+                // 3. Mayor cantidad de goles a favor
+                if (b.gf !== a.gf) return b.gf - a.gf;
+                
+                // 4. Enfrentamiento directo (aquí necesitarías implementarlo)
+                // return compararEnfrentamientoDirecto(a, b);
+                
+                // 5. Orden alfabético como último criterio
+                return a.nombre.localeCompare(b.nombre);
+            });
+        }
+
+        // Función para cargar datos en la tabla
+        function cargarTabla(equiposOrdenados, tablaId) {
+            const tbody = document.querySelector(`#${tablaId} tbody`);
+            tbody.innerHTML = '';
+
+            equiposOrdenados.forEach((equipo, index) => {
+                const row = document.createElement('tr');
+                
+                // Aplicar estilos especiales a los primeros puestos
+                if (index === 0) {
+                    row.innerHTML = `
+                        <td>${index + 1} 🥇</td>
+                        <td><img src="${equipo.escudo}" class="escudo" alt="${equipo.nombre}"> ${equipo.nombre}</td>
+                        <td>${equipo.pj}</td>
+                        <td>${equipo.pg}</td>
+                        <td>${equipo.pe}</td>
+                        <td>${equipo.pp}</td>
+                        <td>${equipo.gf}</td>
+                        <td>${equipo.gc}</td>
+                        <td>${equipo.gf - equipo.gc}</td>
+                        <td><strong>${equipo.pts}</strong></td>
+                    `;
+                } else if (index === 1) {
+                    row.innerHTML = `
+                        <td>${index + 1} 🥈</td>
+                        <td><img src="${equipo.escudo}" class="escudo" alt="${equipo.nombre}"> ${equipo.nombre}</td>
+                        <td>${equipo.pj}</td>
+                        <td>${equipo.pg}</td>
+                        <td>${equipo.pe}</td>
+                        <td>${equipo.pp}</td>
+                        <td>${equipo.gf}</td>
+                        <td>${equipo.gc}</td>
+                        <td>${equipo.gf - equipo.gc}</td>
+                        <td><strong>${equipo.pts}</strong></td>
+                    `;
+                } else if (index === 2) {
+                    row.innerHTML = `
+                        <td>${index + 1} 🥉</td>
+                        <td><img src="${equipo.escudo}" class="escudo" alt="${equipo.nombre}"> ${equipo.nombre}</td>
+                        <td>${equipo.pj}</td>
+                        <td>${equipo.pg}</td>
+                        <td>${equipo.pe}</td>
+                        <td>${equipo.pp}</td>
+                        <td>${equipo.gf}</td>
+                        <td>${equipo.gc}</td>
+                        <td>${equipo.gf - equipo.gc}</td>
+                        <td><strong>${equipo.pts}</strong></td>
+                    `;
+                } else {
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td><img src="${equipo.escudo}" class="escudo" alt="${equipo.nombre}"> ${equipo.nombre}</td>
+                        <td>${equipo.pj}</td>
+                        <td>${equipo.pg}</td>
+                        <td>${equipo.pe}</td>
+                        <td>${equipo.pp}</td>
+                        <td>${equipo.gf}</td>
+                        <td>${equipo.gc}</td>
+                        <td>${equipo.gf - equipo.gc}</td>
+                        <td><strong>${equipo.pts}</strong></td>
+                    `;
+                }
+                
+                tbody.appendChild(row);
+            });
+        }
+
+        // Función para calcular posiciones automáticamente desde localStorage
+        function calcularPosicionesDesdeResultados() {
+            const partidos = JSON.parse(localStorage.getItem('partidos')) || [];
+            const equipos = {};
+
+            // Procesar todos los partidos
+            partidos.forEach(partido => {
+                // Inicializar equipos si no existen
+                if (!equipos[partido.local]) {
+                    equipos[partido.local] = {
+                        nombre: partido.local,
+                        escudo: `${partido.local.toLowerCase().replace(/\s+/g, '-')}.jpg`,
+                        pj: 0, pg: 0, pe: 0, pp: 0, gf: 0, gc: 0, pts: 0
+                    };
+                }
+                if (!equipos[partido.visitante]) {
+                    equipos[partido.visitante] = {
+                        nombre: partido.visitante,
+                        escudo: `${partido.visitante.toLowerCase().replace(/\s+/g, '-')}.jpg`,
+                        pj: 0, pg: 0, pe: 0, pp: 0, gf: 0, gc: 0, pts: 0
+                    };
+                }
+
+                // Actualizar estadísticas
+                equipos[partido.local].pj++;
+                equipos[partido.visitante].pj++;
+                
+                equipos[partido.local].gf += partido.golesLocal;
+                equipos[partido.local].gc += partido.golesVisitante;
+                equipos[partido.visitante].gf += partido.golesVisitante;
+                equipos[partido.visitante].gc += partido.golesLocal;
+
+                // Calcular puntos
+                if (partido.golesLocal > partido.golesVisitante) {
+                    equipos[partido.local].pg++;
+                    equipos[partido.local].pts += 3;
+                    equipos[partido.visitante].pp++;
+                } else if (partido.golesLocal < partido.golesVisitante) {
+                    equipos[partido.visitante].pg++;
+                    equipos[partido.visitante].pts += 3;
+                    equipos[partido.local].pp++;
+                } else {
+                    equipos[partido.local].pe++;
+                    equipos[partido.visitante].pe++;
+                    equipos[partido.local].pts += 1;
+                    equipos[partido.visitante].pts += 1;
+                }
+            });
+
+            return equipos;
+        }
+
+        // Al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            // Opción 1: Usar datos estáticos (ejemplo)
+            const zonaAOrdenada = ordenarEquipos(equiposZonaA);
+            const zonaBOrdenada = ordenarEquipos(equiposZonaB);
+            cargarTabla(zonaAOrdenada, 'tabla-zona-a');
+            cargarTabla(zonaBOrdenada, 'tabla-zona-b');
+
+            // Opción 2: Descomenta para usar datos reales desde localStorage
+            /*
+            const equipos = calcularPosicionesDesdeResultados();
+            const equiposZonaA = Object.values(equipos).filter(e => e.zona === 'A');
+            const equiposZonaB = Object.values(equipos).filter(e => e.zona === 'B');
+            const zonaAOrdenada = ordenarEquipos(equiposZonaA);
+            const zonaBOrdenada = ordenarEquipos(equiposZonaB);
+            cargarTabla(zonaAOrdenada, 'tabla-zona-a');
+            cargarTabla(zonaBOrdenada, 'tabla-zona-b');
+            */
+        });
+    </script>
+</body>
+</html>

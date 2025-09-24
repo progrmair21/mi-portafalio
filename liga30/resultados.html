@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultados - Liga Super 30</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <header>
+    <div class="logo-container" onclick="window.location.href='index.html'">
+      <img src="logo.jpg" alt="Liga Super 30" id="main-logo">
+      <h1>LIGA S30</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="resultados.html">Resultados</a></li>
+        <li><a href="equipos.html">Equipos</a></li>
+        <li><a href="tabla.html">Posiciones</a></li>
+        <li><a href="calendario.html">Calendario</a></li>
+        <li><a href="imagenes.html">Imágenes</a></li>
+        <li><a href="noticias.html">Noticias</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+    <button class="login-btn">Iniciar sesión</button>
+  </header>
+
+  <div class="container">
+    <h1 class="page-title">Resultados - Liga Super 30</h1>
+    
+    <!-- Sección para ingresar nuevos resultados -->
+    <section id="ingresar-resultados">
+      <h2><i class="fas fa-plus-circle"></i> Ingresar Resultado</h2>
+      <form id="formulario-resultados">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fecha"><i class="far fa-calendar-alt"></i> Fecha</label>
+            <input type="number" id="fecha" required min="1">
+          </div>
+          <div class="form-group">
+            <label for="zona"><i class="fas fa-map-marker-alt"></i> Zona</label>
+            <select id="zona" required>
+              <option value="A">Zona A</option>
+              <option value="B">Zona B</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="local"><i class="fas fa-home"></i> Local</label>
+            <input type="text" id="local" required>
+          </div>
+          <div class="form-group">
+            <label for="goles-local"><i class="fas fa-futbol"></i> Goles</label>
+            <input type="number" id="goles-local" required min="0">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="visitante"><i class="fas fa-plane"></i> Visitante</label>
+            <input type="text" id="visitante" required>
+          </div>
+          <div class="form-group">
+            <label for="goles-visitante"><i class="fas fa-futbol"></i> Goles</label>
+            <input type="number" id="goles-visitante" required min="0">
+          </div>
+        </div>
+        
+        <button type="submit"><i class="fas fa-save"></i> Registrar Resultado</button>
+      </form>
+    </section>
+
+    <!-- Tabla de resultados -->
+    <section class="results-container">
+      <h2><i class="fas fa-table"></i> Resultados por Fecha</h2>
+      <div class="table-wrapper">
+        <table id="tabla-resultados">
+          <thead>
+            <tr>
+              <th>Partido</th>
+              <th>Resultado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Los resultados se cargarán aquí dinámicamente -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Resultados recientes agregados -->
+    <section id="resultados-recientes">
+      <h3><i class="fas fa-clock"></i> Últimos Resultados</h3>
+      <div id="lista-resultados-recientes">
+        <!-- Aquí se mostrarán los últimos resultados agregados -->
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Liga Super 30. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    // Datos de todas las fechas (históricos) - Versión corregida
+    const partidosHistoricos = [
+      {
+        fecha: 1,
+        zona: "A",
+        partidos: [
+          { local: "Oriente Pociteño", visitante: "Union", golesLocal: 1, golesVisitante: 4 },
+          { local: "Victoriano", visitante: "Ferroviario", golesLocal: 3, golesVisitante: 1 },
+          { local: "Real San Martin", visitante: "Almagro", golesLocal: 1, golesVisitante: 1 },
+          { local: "Ferny", visitante: "Los Pumas", golesLocal: 1, golesVisitante: 1 },
+          { local: "Huracan", visitante: "Matadero", golesLocal: 3, golesVisitante: 0 },
+          { local: "El Santo", visitante: "El Rejunte", golesLocal: 2, golesVisitante: 1 },
+          { local: "Arenales", visitante: "Estibadores", golesLocal: 0, golesVisitante: 1 },
+          { local: "Aston Birra", visitante: "La Villa Real", golesLocal: 0, golesVisitante: 0 }
+        ]
+      },
+      // ... (mantén el resto de tus fechas históricas aquí)
+    ];
+
+    // Cargar partidos al iniciar - Versión corregida
+    document.addEventListener('DOMContentLoaded', function() {
+      // Verificar si ya existen partidos en localStorage
+      if (!localStorage.getItem('partidos')) {
+        // Si no hay datos, inicializar con los históricos
+        inicializarDatos();
+      }
+      cargarPartidos();
+      mostrarResultadosRecientes();
+    });
+
+    // Función para inicializar los datos - Versión corregida
+    function inicializarDatos() {
+      const partidosParaGuardar = [];
+      
+      partidosHistoricos.forEach(fecha => {
+        fecha.partidos.forEach(partido => {
+          // Solo agregar partidos con resultados definidos
+          if (partido.golesLocal !== null && partido.golesVisitante !== null) {
+            partidosParaGuardar.push({
+              fecha: fecha.fecha,
+              local: partido.local,
+              golesLocal: partido.golesLocal,
+              visitante: partido.visitante,
+              golesVisitante: partido.golesVisitante,
+              zona: fecha.zona,
+              // Agregar timestamp para ordenamiento
+              timestamp: new Date().getTime()
+            });
+          }
+        });
+      });
+
+      guardarPartidos(partidosParaGuardar);
+      localStorage.setItem('partidosInicializados', 'true');
+    }
+
+    // Función para obtener partidos - Versión corregida
+    function obtenerPartidos() {
+      const partidosGuardados = localStorage.getItem('partidos');
+      return partidosGuardados ? JSON.parse(partidosGuardados) : [];
+    }
+
+    // Función para guardar partidos - Versión corregida
+    function guardarPartidos(partidos) {
+      // Ordenar partidos por fecha (más reciente primero) y timestamp
+      partidos.sort((a, b) => {
+        if (b.fecha !== a.fecha) return b.fecha - a.fecha;
+        return b.timestamp - a.timestamp;
+      });
+      localStorage.setItem('partidos', JSON.stringify(partidos));
+    }
+
+    // Función para cargar partidos en la tabla - Versión corregida
+    function cargarPartidos() {
+      const partidos = obtenerPartidos();
+      const tabla = document.getElementById('tabla-resultados').querySelector('tbody');
+      tabla.innerHTML = '';
+
+      if (partidos.length === 0) {
+        tabla.innerHTML = '<tr><td colspan="2" style="text-align: center;">No hay resultados registrados</td></tr>';
+        return;
+      }
+
+      // Agrupar por fecha
+      const fechas = {};
+      partidos.forEach(partido => {
+        if (!fechas[partido.fecha]) {
+          fechas[partido.fecha] = [];
+        }
+        fechas[partido.fecha].push(partido);
+      });
+
+      // Ordenar fechas y mostrar
+      Object.keys(fechas).sort((a, b) => b - a).forEach(fecha => {
+        // Fila de fecha
+        const filaFecha = document.createElement('tr');
+        filaFecha.classList.add('fecha');
+        filaFecha.innerHTML = `<td colspan="2">Fecha ${fecha} (Zona ${fechas[fecha][0].zona})</td>`;
+        tabla.appendChild(filaFecha);
+
+        // Partidos de esta fecha
+        fechas[fecha].forEach(partido => {
+          const filaPartido = document.createElement('tr');
+          filaPartido.innerHTML = `
+            <td class="equipos">${partido.local} vs ${partido.visitante}</td>
+            <td class="resultado">${partido.golesLocal} - ${partido.golesVisitante}</td>
+          `;
+          tabla.appendChild(filaPartido);
+        });
+      });
+    }
+
+    // Función para mostrar resultados recientes - Versión corregida
+    function mostrarResultadosRecientes() {
+      const partidos = obtenerPartidos();
+      const listaRecientes = document.getElementById('lista-resultados-recientes');
+      listaRecientes.innerHTML = '';
+
+      // Tomar los últimos 5 partidos ordenados por fecha y timestamp
+      const recientes = partidos.slice(0, 5);
+      
+      if (recientes.length === 0) {
+        listaRecientes.innerHTML = '<p style="text-align: center;">No hay resultados recientes</p>';
+        return;
+      }
+
+      recientes.forEach(partido => {
+        const elemento = document.createElement('div');
+        elemento.classList.add('resultado-reciente');
+        elemento.innerHTML = `
+          <span>${partido.local} vs ${partido.visitante}</span>
+          <strong>${partido.golesLocal} - ${partido.golesVisitante}</strong>
+        `;
+        listaRecientes.appendChild(elemento);
+      });
+    }
+
+    // Manejar el formulario - Versión corregida
+    document.getElementById('formulario-resultados').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const fechaInput = document.getElementById('fecha');
+      const localInput = document.getElementById('local');
+      const visitanteInput = document.getElementById('visitante');
+      const golesLocalInput = document.getElementById('goles-local');
+      const golesVisitanteInput = document.getElementById('goles-visitante');
+      const zonaSelect = document.getElementById('zona');
+
+      // Validación mejorada
+      if (!fechaInput.value || isNaN(fechaInput.value) || fechaInput.value < 1) {
+        alert('Por favor ingrese un número de fecha válido (mayor a 0)');
+        fechaInput.focus();
+        return;
+      }
+
+      if (!localInput.value.trim() || !visitanteInput.value.trim()) {
+        alert('Los nombres de los equipos no pueden estar vacíos');
+        return;
+      }
+
+      if (localInput.value.trim().toLowerCase() === visitanteInput.value.trim().toLowerCase()) {
+        alert('Los equipos no pueden ser iguales');
+        return;
+      }
+
+      if (isNaN(golesLocalInput.value) || golesLocalInput.value < 0) {
+        alert('Ingrese un número válido para goles del local (mayor o igual a 0)');
+        golesLocalInput.focus();
+        return;
+      }
+
+      if (isNaN(golesVisitanteInput.value) || golesVisitanteInput.value < 0) {
+        alert('Ingrese un número válido para goles del visitante (mayor o igual a 0)');
+        golesVisitanteInput.focus();
+        return;
+      }
+
+      const nuevoPartido = {
+        fecha: parseInt(fechaInput.value),
+        local: localInput.value.trim(),
+        golesLocal: parseInt(golesLocalInput.value),
+        visitante: visitanteInput.value.trim(),
+        golesVisitante: parseInt(golesVisitanteInput.value),
+        zona: zonaSelect.value,
+        timestamp: new Date().getTime() // Agregar marca de tiempo
+      };
+
+      // Guardar en localStorage
+      const partidos = obtenerPartidos();
+      partidos.unshift(nuevoPartido); // Agregar al inicio para que aparezca primero
+      guardarPartidos(partidos);
+
+      // Actualizar las vistas
+      cargarPartidos();
+      mostrarResultadosRecientes();
+
+      // Limpiar formulario (excepto zona)
+      fechaInput.value = '';
+      localInput.value = '';
+      visitanteInput.value = '';
+      golesLocalInput.value = '';
+      golesVisitanteInput.value = '';
+      
+      // Mostrar confirmación mejorada
+      const confirmacion = document.createElement('div');
+      confirmacion.innerHTML = `
+        <div style="
+          background: #4CAF50;
+          color: white;
+          padding: 10px;
+          border-radius: 5px;
+          margin-top: 15px;
+          text-align: center;
+          font-weight: bold;
+        ">
+          <i class="fas fa-check-circle"></i> Resultado registrado correctamente!
+        </div>
+      `;
+      
+      const form = e.target;
+      form.insertBefore(confirmacion, form.lastElementChild);
+      
+      // Eliminar el mensaje después de 3 segundos
+      setTimeout(() => {
+        confirmacion.style.opacity = '0';
+        setTimeout(() => confirmacion.remove(), 300);
+      }, 3000);
+      
+      // Enfocar el primer campo para nuevo registro
+      fechaInput.focus();
+    });
+
+    // Cargar datos iniciales si es la primera vez
+    if (!localStorage.getItem('partidosInicializados')) {
+      inicializarDatos();
+    }
+  </script>
+</body>
+</html>

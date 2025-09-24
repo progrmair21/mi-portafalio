@@ -1,0 +1,424 @@
+/* General Styles */
+:root {
+  --primary: #2c3e50;
+  --secondary: #1abc9c;
+  --accent: #e74c3c;
+  --light: #ecf0f1;
+  --dark: #2c3e50;
+  --gold: #f1c40f;
+  --silver: #bdc3c7;
+  --bronze: #e67e22;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+:root {
+  --logo-3d-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  --logo-border: 3px solid #1abc9c;
+}
+
+.logo-3d {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+}
+.logo-3d img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: var(--logo-border);
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);
+  box-shadow: 
+      0 0 0 2px rgba(255,255,255,0.2),
+      var(--logo-3d-shadow);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+  perspective: 500px;
+}
+
+.logo-3d:hover img {
+  transform: rotateY(20deg) scale(1.1);
+  box-shadow: 
+      0 0 20px rgba(26, 188, 156, 0.6),
+      0 5px 30px rgba(0, 0, 0, 0.4);
+  filter: brightness(1.05);
+}
+
+.logo-3d h1 {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 2.5rem;
+  background: linear-gradient(to right, #1abc9c, #3498db);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.logo-3d:hover h1 {
+  letter-spacing: 1.5px;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+}
+/* ESTILOS BASE DEL LOGO */
+.logo-parallax {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+  z-index: 100;
+}
+
+.logo-parallax img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 3px solid #1abc9c;
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);
+  box-shadow: 
+      0 5px 15px rgba(0, 0, 0, 0.2),
+      0 0 0 2px rgba(255, 255, 255, 0.3);
+  transition: transform 0.1s linear;
+  will-change: transform; /* Optimización para navegadores */
+}
+
+.logo-parallax h1 {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 2.5rem;
+  background: linear-gradient(to right, #1abc9c, #3498db);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.1s linear;
+}
+
+/* Efecto para móviles (alternativo) */
+@media (max-width: 768px) {
+  .logo-parallax img {
+      animation: flotar 3s ease-in-out infinite;
+  }
+  
+  @keyframes flotar {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(5deg); }
+  }
+}
+/* Efecto para móviles (sin hover) */
+@media (max-width: 768px) {
+  .logo-3d img {
+      animation: float-logo 3s ease-in-out infinite;
+  }
+}
+
+@keyframes float-logo {
+  0%, 100% { transform: translateY(0) rotateY(0); }
+  50% { transform: translateY(-10px) rotateY(10deg); }
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #1abc9c;
+}
+
+.login-btn {
+  background-color: #1abc9c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #16a085;
+}
+
+/* Banner Hero */
+.hero-banner {
+  position: relative;
+  height: 80vh;
+  min-height: 500px;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)),
+              url('https://images.unsplash.com/photo-1579952363872-2898cd6f7b38?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  padding: 0 20px;
+  animation: fadeInUp 1.5s ease-out;
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 5rem;
+  margin: 0;
+  color: #fff;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+  line-height: 1;
+  letter-spacing: 3px;
+}
+
+.hero-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  margin: 20px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  position: relative;
+  display: inline-block;
+}
+
+.hero-subtitle::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: #1abc9c;
+}
+
+.cta-button {
+  display: inline-block;
+  background: #e74c3c;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 50px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 30px;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.cta-button:hover {
+  background: #c0392b;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Animación */
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+      transform: translateY(50px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Efecto de partículas */
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.2)"/><circle cx="80" cy="20" r="1" fill="rgba(255,255,255,0.2)"/><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.2)"/><circle cx="10" cy="80" r="1" fill="rgba(255,255,255,0.2)"/><circle cx="90" cy="80" r="1" fill="rgba(255,255,255,0.2)"/></svg>');
+  background-size: 100px 100px;
+  animation: particlesMove 20s linear infinite;
+}
+
+@keyframes particlesMove {
+  from { background-position: 0 0 }
+  to { background-position: 100px 100px }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-title {
+      font-size: 3.5rem;
+  }
+  .hero-subtitle {
+      font-size: 1.5rem;
+  }
+  .hero-banner {
+      height: 60vh;
+      background-attachment: scroll;
+  }
+}
+/* Estilos para la sección de equipos */
+.equipos {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.equipos h2 {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.equipos-grid {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Estilos para las tarjetas de zonas (Zona A y Zona B) */
+.equipo-card {
+  background-image: url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); /* Imagen de estadio de fútbol */
+  background-size: cover; /* Cubre todo el contenedor */
+  background-position: center; /* Centra la imagen */
+  background-blend-mode: overlay; /* Mezcla con el color de fondo */
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente para mejorar la legibilidad */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  width: 45%;
+  min-width: 300px;
+  color: white;
+}
+
+/* Overlay semi-transparente */
+.equipo-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+/* Contenido de las tarjetas */
+.equipo-card h3 {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 2;
+}
+
+.equipos-lista {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Estilos para los equipos */
+.equipo-item {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+.equipo-item img {
+  height: 30px;
+  margin-right: 10px;
+}
+
+/* Botón "Ver más" */
+.equipo-card button {
+  background-color: #1abc9c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 15px;
+  border-radius: 5px;
+  position: relative;
+  z-index: 2;
+}
+
+.equipo-card button:hover {
+  background-color: #16a085;
+}
+
+footer {
+  background-color: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #1abc9c;
+}
+
+.social-media img {
+  height: 30px;
+  margin: 10px;
+}
